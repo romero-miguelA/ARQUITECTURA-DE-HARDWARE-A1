@@ -1,2 +1,44 @@
-LINK DEL WOKWI: 
-CÓDIGO FUENTE: 
+LINK DEL WOKWI: https://wokwi.com/projects/372996299749823489
+
+CÓDIGO FUENTE: def convert_base(number, from_base, to_base):
+    if from_base == 10:
+        decimal_number = int(number)
+    else:
+        decimal_number = int(str(number), from_base)
+
+    converted_number = ""
+    while decimal_number > 0:
+        remainder = decimal_number % to_base
+        if remainder < 10:
+            converted_number = str(remainder) + converted_number
+        else:
+            converted_number = chr(ord('A') + remainder - 10) + converted_number
+        decimal_number //= to_base
+
+    return converted_number
+
+def main():
+    try:
+        number = input("Ingrese el número en base M: ")
+        from_base = int(input("Ingrese la base M (entre 1 y 16): "))
+        to_base = int(input("Ingrese la base N (entre 1 y 16): "))
+        
+        if from_base < 1 or from_base > 16 or to_base < 1 or to_base > 16:
+            print("Las bases deben estar entre 1 y 16.")
+            return
+
+        converted_number = convert_base(number, from_base, to_base)
+        binary_representation = convert_base(number, from_base, 2)
+        ascii_value = int(converted_number, to_base)
+
+        print("El número convertido a base", to_base, "es:", converted_number)
+        print("Representación en binario:", binary_representation)
+        print("Valor ASCII:", ascii_value)
+
+    except ValueError:
+        print("Entrada inválida. Asegúrate de ingresar números válidos en las bases correctas.")
+
+if __name__ == "__main__":
+    main()
+
+
